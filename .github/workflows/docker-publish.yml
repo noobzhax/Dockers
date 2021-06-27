@@ -37,7 +37,7 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/${{ github.repository }}:$GITHUB_ENV
+          tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
           
       - name: Alert via Telegram
         run: |

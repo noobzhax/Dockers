@@ -28,7 +28,8 @@ jobs:
         run: echo "TAG=latest" >> $GITHUB_ENV
         
       - if: startsWith(github.ref, 'refs/tags')
-        run: echo "TAG=$(git describe --tags)" >> $GITHUB_ENV    
+        run: echo "TAG=$(git describe --tags)" >> $GITHUB_ENV
+
       - name: Build & Push
         uses: docker/build-push-action@v2
         with:
@@ -36,4 +37,12 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ github.repository }}:$GITHUB_ENV
+          
+      - name: Alert via Telegram
+        run: |
+          function sendTG() {
+              curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendmessage" \
+              --data "text=${*}&chat_id=${{ secrets.TELEGRAM_TO }}&parse_mode=Markdown&disable_notification=True"
+          }
+          sendTG "*Docker container has been updated:* [Link](${{ github.repository }})" &> /dev/null

@@ -36,10 +36,10 @@ RUN apt-get -qq update && \
     mv heroku /usr/local/lib/heroku && \
     ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 
-RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
-    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
+RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/noobzhax/slam-mirrorbot/master/extract \
+    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/noobzhax/slam-mirrorbot/master/pextract \
     && chmod +x /usr/local/bin/extract /usr/local/bin/pextract \
-    && wget https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
+    && wget https://raw.githubusercontent.com/noobzhax/slam-mirrorbot/master/requirements.txt \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
     # Cleanup environment

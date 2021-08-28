@@ -36,18 +36,6 @@ RUN apt-get -qq update && \
     mv heroku /usr/local/lib/heroku && \
     ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 
-RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/noobzhax/slam-mirrorbot/master/extract \
-    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/noobzhax/slam-mirrorbot/master/pextract \
-    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract \
-    && wget https://raw.githubusercontent.com/noobzhax/slam-mirrorbot/master/requirements.txt \
-    && pip3 install --no-cache-dir -r requirements.txt \
-    && rm requirements.txt \
-    # Cleanup environment
-    && apt-get -qq -y purge --autoremove \
-       autoconf automake g++ gcc libtool m4 make software-properties-common swig \
-    && apt-get -qq -y clean \
-    && rm -rf -- /var/lib/apt/lists/* /var/cache/apt/archives/* /etc/apt/sources.list.d/*
-
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
